@@ -32,14 +32,14 @@ logger = logging.getLogger(__name__)
 # =========================
 
 EXPERIMENT_NAME = "Airbnb-Price-Prediction"
-MLFLOW_TRACKING_URI = "http://localhost:5000"  # Cambia si usas un servidor remoto
+MLFLOW_TRACKING_URI = "./mlruns"
 MODEL_REGISTRY_NAME = "AirbnbRandomForestModel"
 
 # Crear directorio para modelos si no existe
 os.makedirs("models", exist_ok=True)
 os.makedirs("plots", exist_ok=True)
 
-# Configurar MLflow
+# Configurar MLflow - usar tracking URI local
 mlflow.set_tracking_uri(MLFLOW_TRACKING_URI)
 mlflow.set_experiment(EXPERIMENT_NAME)
 
