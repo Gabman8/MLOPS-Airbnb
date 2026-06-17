@@ -1,33 +1,33 @@
 # MLOPS - Airbnb Price Prediction Pipeline
 
-## 📋 Descripción General
+## 📋 General Description
 
-Este proyecto implementa un pipeline de **Machine Learning Operations (MLOps)** para la predicción de precios de Airbnb. Utiliza **MLflow** para el seguimiento de experimentos, el registro de métricas y la gestión del ciclo de vida del modelo, siguiendo las mejores prácticas de despliegue de algoritmos de ML en producción.
+This project implements a **Machine Learning Operations (MLOps)** pipeline for predicting Airbnb prices. It uses **MLflow** for experiment tracking, metrics logging, and model lifecycle management, following best practices for deploying ML algorithms in production.
 
-### 🎯 Objetivos del MLOps
+### 🎯 MLOps Objectives
 
-Los objetivos principales son:
+The main objectives are:
 
-1. **Automatización del despliegue**: Implementación reproducible de modelos en entornos de producción
-2. **Gestión del ciclo de vida**: Gestionar eficientemente todo el ciclo de vida del modelo
-3. **Colaboración y comunicación**: Facilitar la colaboración entre equipos de desarrollo
-4. **Monitorización y mantenimiento continuo**: Evaluar el rendimiento del modelo en tiempo real
+1. **Deployment Automation**: Reproducible model implementation in production environments
+2. **Lifecycle Management**: Efficiently manage the entire model lifecycle
+3. **Collaboration and Communication**: Facilitate collaboration between development teams
+4. **Continuous Monitoring and Maintenance**: Evaluate model performance in real-time
 
 ---
 
-## 🏗️ Arquitectura del Pipeline
+## 🏗️ Pipeline Architecture
 
 ```
 ┌─────────────────────┐
 │  Data Extraction    │
-│  (CSV Cargado)      │
+│  (CSV Loaded)       │
 └──────────┬──────────┘
            │
 ┌──────────▼──────────┐
 │ Data Preprocessing  │
-│ - Limpieza          │
+│ - Cleaning          │
 │ - Feature Eng.      │
-│ - Codificación      │
+│ - Encoding          │
 └──────────┬──────────┘
            │
 ┌──────────▼──────────┐
@@ -47,7 +47,7 @@ Los objetivos principales son:
 │  Evaluation         │
 │  - MAE, R2, RMSE    │
 │  - Cross-Validation │
-│  - Visualización    │
+│  - Visualization    │
 └──────────┬──────────┘
            │
 ┌──────────▼──────────┐
@@ -60,15 +60,15 @@ Los objetivos principales son:
 
 ---
 
-## 📦 Instalación
+## 📦 Installation
 
-### Requisitos Previos
+### Prerequisites
 
 - Python 3.8+
-- pip o conda
-- Virtual environment (recomendado)
+- pip or conda
+- Virtual environment (recommended)
 
-### Paso 1: Crear y Activar Entorno Virtual
+### Step 1: Create and Activate Virtual Environment
 
 ```bash
 # Windows
@@ -80,112 +80,112 @@ python3 -m venv .venv
 source .venv/bin/activate
 ```
 
-### Paso 2: Instalar Dependencias
+### Step 2: Install Dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### Paso 3: Configurar MLflow (Opcional)
+### Step 3: Configure MLflow (Optional)
 
-Para usar MLflow Server en lugar de archivo local:
+To use MLflow Server instead of local file:
 
 ```bash
-# Instalar MLflow Server
+# Install MLflow Server
 pip install mlflow[postgres]
 
-# Iniciar servidor MLflow
+# Start MLflow server
 mlflow server --backend-store-uri sqlite:///mlflow.db --default-artifact-root ./mlruns
 
-# Acceder a interfaz web
+# Access web interface
 # http://localhost:5000
 ```
 
 ---
 
-## 🚀 Ejecución
+## 🚀 Execution
 
-### Ejecutar Pipeline Completo
+### Run Complete Pipeline
 
 ```bash
 python main.py
 ```
 
-El script ejecutará:
+The script will execute:
 
-1. ✅ Carga y limpieza de datos
-2. ✅ Ingeniería de características
-3. ✅ Entrenamiento con GridSearchCV
-4. ✅ Evaluación del modelo
-5. ✅ Registro de métricas en MLflow
-6. ✅ Generación de visualizaciones
-7. ✅ Almacenamiento del modelo
-
----
-
-## 📊 Métricas y Seguimiento
-
-### Métricas Registradas en MLflow
-
-El pipeline registra automáticamente:
-
-#### Parámetros
-
-- `test_size`: Porcentaje de datos para test (0.2)
-- `random_state`: Seed para reproducibilidad (42)
-- `cv_folds`: Número de folds en validación cruzada (3)
-- `best_n_estimators`: Mejor número de árboles
-- `best_max_depth`: Mejor profundidad máxima
-- `best_min_samples_split`: Mejor número mínimo de muestras
-
-#### Métricas
-
-| Métrica         | Descripción                              |
-| --------------- | ---------------------------------------- |
-| **MAE**         | Error Absoluto Medio (Dollar difference) |
-| **R2**          | Coeficiente de Determinación (0-1)       |
-| **RMSE**        | Raíz del Error Cuadrático Medio          |
-| **CV_MAE_mean** | MAE medio en validación cruzada          |
-| **CV_MAE_std**  | Desviación estándar del MAE en CV        |
-
-#### Artefactos
-
-- `real_vs_predicho.png`: Gráfico de predicciones vs valores reales
-- `residuos.png`: Análisis de residuos
-- `importancia_variables.png`: Importancia de características
-- `airbnb_model_YYYYMMDD_HHMMSS.pkl`: Modelo entrenado
+1. ✅ Data loading and cleaning
+2. ✅ Feature engineering
+3. ✅ Training with GridSearchCV
+4. ✅ Model evaluation
+5. ✅ Metrics logging in MLflow
+6. ✅ Visualization generation
+7. ✅ Model storage
 
 ---
 
-## 📁 Estructura de Archivos
+## 📊 Metrics and Tracking
+
+### Metrics Logged in MLflow
+
+The pipeline automatically registers:
+
+#### Parameters
+
+- `test_size`: Percentage of data for testing (0.2)
+- `random_state`: Seed for reproducibility (42)
+- `cv_folds`: Number of folds in cross-validation (3)
+- `best_n_estimators`: Best number of trees
+- `best_max_depth`: Best maximum depth
+- `best_min_samples_split`: Best minimum number of samples
+
+#### Metrics
+
+| Metric          | Description                             |
+| --------------- | --------------------------------------- |
+| **MAE**         | Mean Absolute Error (Dollar difference) |
+| **R2**          | Coefficient of Determination (0-1)      |
+| **RMSE**        | Root Mean Squared Error                 |
+| **CV_MAE_mean** | Mean MAE in cross-validation            |
+| **CV_MAE_std**  | Standard deviation of MAE in CV         |
+
+#### Artifacts
+
+- `real_vs_predicho.png`: Plot of predictions vs actual values
+- `residuos.png`: Residuals analysis
+- `importancia_variables.png`: Feature importance
+- `airbnb_model_YYYYMMDD_HHMMSS.pkl`: Trained model
+
+---
+
+## 📁 File Structure
 
 ```
 MLOPS-Airbnb/
-├── main.py                              # Script principal del pipeline
-├── requirements.txt                     # Dependencias del proyecto
-├── README.md                           # Esta documentación
-├── airbnb-listings-extract.csv         # Dataset de Airbnb
-├── mlops_pipeline.log                  # Logs detallados de ejecución
+├── main.py                              # Main pipeline script
+├── requirements.txt                     # Project dependencies
+├── README.md                           # This documentation
+├── airbnb-listings-extract.csv         # Airbnb dataset
+├── mlops_pipeline.log                  # Detailed execution logs
 │
-├── models/                             # Directorio de modelos guardados
+├── models/                             # Directory of saved models
 │   └── airbnb_model_YYYYMMDD_HHMMSS.pkl
 │
-├── plots/                              # Visualizaciones generadas
+├── plots/                              # Generated visualizations
 │   ├── real_vs_predicho.png
 │   ├── residuos.png
 │   └── importancia_variables.png
 │
 └── mlruns/                             # MLflow experiment tracking
-    └── (Generado automáticamente por MLflow)
+    └── (Auto-generated by MLflow)
 ```
 
 ---
 
-## 🔍 Detalles de Implementación
+## 🔍 Implementation Details
 
-### 1. Logging Centralizado
+### 1. Centralized Logging
 
-El pipeline implementa logging en dos niveles:
+The pipeline implements logging at two levels:
 
 ```python
 logging.basicConfig(
@@ -198,43 +198,43 @@ logging.basicConfig(
 )
 ```
 
-**Ventajas:**
+**Advantages:**
 
-- Trazabilidad completa de la ejecución
-- Logs guardados en archivo para auditoría
-- Información en consola para monitoreo en tiempo real
+- Complete execution traceability
+- Logs saved to file for audit
+- Console information for real-time monitoring
 
 ### 2. MLflow Integration
 
-El pipeline envuelve todo el proceso de entrenamiento en un contexto de MLflow:
+The pipeline wraps the entire training process in an MLflow context:
 
 ```python
 with mlflow.start_run(run_name=f"airbnb_training_{timestamp}"):
-    # Parámetros, métricas y artefactos se registran automáticamente
+    # Parameters, metrics and artifacts are automatically logged
 ```
 
-**Características:**
+**Features:**
 
-- Rastreo automático de parámetros e hiperparámetros
-- Registro de todas las métricas de evaluación
-- Guardado de modelos para reproducibilidad
-- Interfaz web para comparación de experimentos
+- Automatic tracking of parameters and hyperparameters
+- Logging of all evaluation metrics
+- Model saving for reproducibility
+- Web interface for experiment comparison
 
-### 3. Preprocesamiento de Datos
+### 3. Data Preprocessing
 
-#### Limpieza
+#### Cleaning
 
-- Conversión de formato de precios (string → float)
-- Manejo de porcentajes en variables de host
-- Eliminación de valores nulos
+- Price format conversion (string → float)
+- Handling percentages in host variables
+- Removal of null values
 
-#### Ingeniería de Características
+#### Feature Engineering
 
-- 15 features seleccionadas manualmente
-- One-hot encoding para variables categóricas
-- Transformación logarítmica del target (log1p)
+- 15 manually selected features
+- One-hot encoding for categorical variables
+- Logarithmic transformation of target (log1p)
 
-#### Manejo de Outliers
+#### Outlier Handling
 
 ```python
 # IQR method (Interquartile Range)
@@ -245,17 +245,17 @@ lower = Q1 - 1.5 * IQR
 upper = Q3 + 1.5 * IQR
 ```
 
-**Resultado:** Típicamente se eliminan ~5-10% de outliers
+**Result:** Typically ~5-10% of outliers are removed
 
-#### Imputación
+#### Imputation
 
 ```python
 imputer = SimpleImputer(strategy="median")
 ```
 
-### 4. Entrenamiento del Modelo
+### 4. Model Training
 
-**Algoritmo:** Random Forest Regressor
+**Algorithm:** Random Forest Regressor
 
 **Hyperparameter Tuning:**
 
@@ -271,20 +271,20 @@ param_grid = {
 
 - Cross-validation: 5-fold CV
 - Scoring: neg_mean_absolute_error
-- Parallelization: n_jobs=-1 (todos los cores disponibles)
+- Parallelization: n_jobs=-1 (all available cores)
 
-### 5. Evaluación del Modelo
+### 5. Model Evaluation
 
 #### Test Set Metrics
 
-- **MAE**: Métrica principal (en precios reales)
-- **R2**: Proporción de varianza explicada
-- **RMSE**: Raíz del error cuadrático medio
+- **MAE**: Primary metric (in actual prices)
+- **R2**: Proportion of variance explained
+- **RMSE**: Root mean squared error
 
 #### Cross-Validation
 
 ```python
-# 5-fold cross-validation para validar robustez
+# 5-fold cross-validation to validate robustness
 scores = cross_val_score(model, X_train, y_train, cv=5)
 cv_mae_mean = -scores.mean()
 cv_mae_std = scores.std()
@@ -292,106 +292,106 @@ cv_mae_std = scores.std()
 
 ---
 
-## 📈 Visualizaciones Generadas
+## 📈 Generated Visualizations
 
-### 1. Real vs Predicho
+### 1. Real vs Predicted
 
-- **Propósito:** Evaluar calidad de predicciones
-- **Interpretación:** Puntos cercanos a la línea diagonal indican predicciones precisas
+- **Purpose:** Evaluate prediction quality
+- **Interpretation:** Points close to the diagonal line indicate accurate predictions
 
-### 2. Análisis de Residuos
+### 2. Residuals Analysis
 
-- **Propósito:** Detectar sesgos y varianza heterogénea
-- **Interpretación:** Residuos distribuidos aleatoriamente alrededor de cero = buen ajuste
+- **Purpose:** Detect bias and heterogeneous variance
+- **Interpretation:** Residuals randomly distributed around zero = good fit
 
-### 3. Importancia de Variables
+### 3. Feature Importance
 
-- **Propósito:** Identificar features más influyentes
-- **Top 15 features:** Mostrados en gráfico de barras horizontal
+- **Purpose:** Identify most influential features
+- **Top 15 features:** Displayed in horizontal bar chart
 
 ---
 
-## 🔄 Ciclo de Vida del Modelo (MLOps)
+## 🔄 Model Lifecycle (MLOps)
 
 ```
-1. EXPERIMENTACIÓN (Esta ejecución)
-   ├─ Entrenamiento con múltiples configs
-   ├─ Registro de parámetros y métricas
-   ├─ Evaluación y validación
-   └─ Persistencia de artefactos
+1. EXPERIMENTATION (This execution)
+   ├─ Training with multiple configs
+   ├─ Parameter and metrics logging
+   ├─ Evaluation and validation
+   └─ Artifact persistence
 
-2. VALIDACIÓN
-   ├─ Comparación de experimentos en MLflow UI
-   ├─ Análisis de rendimiento
-   └─ Selección del mejor modelo
+2. VALIDATION
+   ├─ Experiment comparison in MLflow UI
+   ├─ Performance analysis
+   └─ Best model selection
 
 3. STAGING
-   ├─ Registro en MLflow Model Registry
-   ├─ Pruebas en entorno de staging
-   └─ Validación final
+   ├─ Registration in MLflow Model Registry
+   ├─ Testing in staging environment
+   └─ Final validation
 
-4. PRODUCCIÓN
-   ├─ Despliegue en cloud (GCP Cloud Run, AWS)
-   ├─ Monitorización continua
-   ├─ Reentrenamiento automático si es necesario
-   └─ Rollback en caso de degradación
+4. PRODUCTION
+   ├─ Cloud deployment (GCP Cloud Run, AWS)
+   ├─ Continuous monitoring
+   ├─ Automatic retraining if necessary
+   └─ Rollback in case of degradation
 
-5. MONITORIZACIÓN
-   ├─ Seguimiento de datos de entrada
-   ├─ Detección de data drift
-   ├─ Alertas si rendimiento baja
-   └─ Recolección de feedback
+5. MONITORING
+   ├─ Input data tracking
+   ├─ Data drift detection
+   ├─ Alerts if performance drops
+   └─ Feedback collection
 ```
 
 ---
 
-## 💾 Persistencia y Reproducibilidad
+## 💾 Persistence and Reproducibility
 
-### Reproducibilidad Garantizada
+### Guaranteed Reproducibility
 
-- **Random State**: Fijado a 42 en todos los componentes estocásticos
-- **Versioning**: Cada ejecución crea run único con timestamp
-- **Versionado de Código**: Git para rastrear cambios en pipeline
-- **Artifact Logging**: Todos los artefactos guardados en MLflow
+- **Random State**: Fixed at 42 in all stochastic components
+- **Versioning**: Each execution creates a unique run with timestamp
+- **Code Versioning**: Git to track pipeline changes
+- **Artifact Logging**: All artifacts saved in MLflow
 
-### Cómo Reproductibilizar
+### How to Reproduce
 
 ```bash
-# Acceder a MLflow UI
+# Access MLflow UI
 mlflow ui
 
-# Seleccionar run específico
-# Descargar modelo y parámetros exactos
-# Ejecutar con los mismos datos
+# Select specific run
+# Download model and exact parameters
+# Execute with the same data
 ```
 
 ---
 
-## 🛠️ Hardware Recomendado
+## 🛠️ Recommended Hardware
 
-**Tipo de Inferencia:** Batch Processing (recomendado para este dataset)
+**Inference Type:** Batch Processing (recommended for this dataset)
 
-| Recurso        | Mínimo       | Recomendado | Producción |
-| -------------- | ------------ | ----------- | ---------- |
-| CPU            | 2 cores      | 4+ cores    | 8+ cores   |
-| RAM            | 4 GB         | 8 GB        | 16+ GB     |
-| GPU            | No necesario | Optional    | RTX 3060+  |
-| Almacenamiento | 5 GB         | 20 GB       | 100+ GB    |
+| Resource | Minimum      | Recommended | Production |
+| -------- | ------------ | ----------- | ---------- |
+| CPU      | 2 cores      | 4+ cores    | 8+ cores   |
+| RAM      | 4 GB         | 8 GB        | 16+ GB     |
+| GPU      | Not required | Optional    | RTX 3060+  |
+| Storage  | 5 GB         | 20 GB       | 100+ GB    |
 
-**Nota:** Random Forest requiere CPU principalmente. GPUs son útiles para Deep Learning.
+**Note:** Random Forest primarily requires CPU. GPUs are useful for Deep Learning.
 
 ---
 
-## ☁️ Despliegue en Cloud (Próximos Pasos)
+## ☁️ Cloud Deployment (Next Steps)
 
 ### Google Cloud Platform (GCP)
 
 ```bash
-# 1. Exportar modelo desde MLflow
+# 1. Export model from MLflow
 mlflow models serve -m "models:/AirbnbRandomForestModel/production"
 
-# 2. Crear Dockerfile
-# 3. Desplegar en Cloud Run
+# 2. Create Dockerfile
+# 3. Deploy to Cloud Run
 gcloud run deploy airbnb-predictor \
   --source . \
   --region us-central1 \
@@ -402,30 +402,30 @@ gcloud run deploy airbnb-predictor \
 ### AWS
 
 ```bash
-# Usar SageMaker para hosting
-# Crear endpoint REST
-# Configurar auto-scaling
+# Use SageMaker for hosting
+# Create REST endpoint
+# Configure auto-scaling
 ```
 
 ---
 
-## 📝 Logs Disponibles
+## 📝 Available Logs
 
-El sistema genera dos tipos de logs:
+The system generates two types of logs:
 
-### 1. Console Output (Tiempo Real)
+### 1. Console Output (Real-time)
 
 ```
-2024-01-15 10:30:45 - __main__ - INFO - Cargando datos...
-2024-01-15 10:30:46 - __main__ - INFO - Datos cargados: 5000 filas
+2024-01-15 10:30:45 - __main__ - INFO - Loading data...
+2024-01-15 10:30:46 - __main__ - INFO - Data loaded: 5000 rows
 ...
 ```
 
 ### 2. File Logs (`mlops_pipeline.log`)
 
 ```
-2024-01-15 10:30:45,123 - __main__ - INFO - Iniciando pipeline MLOPS
-2024-01-15 10:30:46,456 - __main__ - INFO - GridSearchCV completado
+2024-01-15 10:30:45,123 - __main__ - INFO - Starting MLOPS pipeline
+2024-01-15 10:30:46,456 - __main__ - INFO - GridSearchCV completed
 ...
 ```
 
@@ -433,83 +433,83 @@ El sistema genera dos tipos de logs:
 
 ## 🔧 Troubleshooting
 
-### Problema: MLflow no se conecta
+### Problem: MLflow connection fails
 
 ```bash
-# Solución: Verificar servidor MLflow
+# Solution: Verify MLflow server
 mlflow server --backend-store-uri sqlite:///mlflow.db
 ```
 
-### Problema: Memoria insuficiente
+### Problem: Insufficient memory
 
 ```bash
-# Solución: Reducir tamaño de batch o GridSearch
-# Cambiar param_grid en main.py
+# Solution: Reduce batch size or GridSearch
+# Change param_grid in main.py
 ```
 
-### Problema: Modelos no se guardan
+### Problem: Models not being saved
 
 ```bash
-# Verificar permisos en directorio models/
+# Check permissions in models/ directory
 chmod -R 755 models/
 ```
 
 ---
 
-## 📚 Referencias y Recursos
+## 📚 References and Resources
 
-### Documentación Oficial
+### Official Documentation
 
 - [MLflow Documentation](https://mlflow.org/docs/latest/)
 - [Scikit-learn GridSearchCV](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html)
 
-### Conceptos MLOps
+### MLOps Concepts
 
-1. **Experiment Tracking**: Registro automático de parámetros y métricas
-2. **Model Registry**: Versionado y registro de modelos en producción
-3. **Data Versioning**: Control de versiones de datasets
-4. **Model Monitoring**: Seguimiento de rendimiento en producción
-5. **CI/CD Pipelines**: Automatización de deployment
+1. **Experiment Tracking**: Automatic logging of parameters and metrics
+2. **Model Registry**: Versioning and registration of production models
+3. **Data Versioning**: Version control for datasets
+4. **Model Monitoring**: Performance tracking in production
+5. **CI/CD Pipelines**: Deployment automation
 
-### Mejores Prácticas
+### Best Practices
 
-- ✅ Siempre registrar parámetros y métricas
-- ✅ Versionar datos y modelos
-- ✅ Mantener logs detallados
-- ✅ Implementar validación cruzada
-- ✅ Monitorizar en producción
-- ❌ Evitar hardcoding de rutas
-- ❌ No ignorar outliers sin análisis
-- ❌ Olvidar documentar cambios
-
----
-
-## 👥 Autoría y Contribuciones
-
-**Creado por:** KeepCoding MLOps Masterclass
-**Adaptado para:** Airbnb Price Prediction
-**Fecha:** 2024
+- ✅ Always log parameters and metrics
+- ✅ Version data and models
+- ✅ Maintain detailed logs
+- ✅ Implement cross-validation
+- ✅ Monitor in production
+- ❌ Avoid hardcoding paths
+- ❌ Don't ignore outliers without analysis
+- ❌ Forget to document changes
 
 ---
 
-## 📄 Licencia
+## 👥 Authorship and Contributions
 
-Este proyecto está disponible bajo licencia MIT.
+**Created by:** KeepCoding MLOps Masterclass
+**Adapted for:** Airbnb Price Prediction
+**Date:** 2024
 
 ---
 
-## 🎓 Conclusión
+## 📄 License
 
-Este pipeline demuestra los **4 objetivos principales del MLOps**:
+This project is available under the MIT license.
 
-1. ✅ **Automatización**: El pipeline se ejecuta completamente sin intervención manual
-2. ✅ **Gestión del Ciclo de Vida**: MLflow maneja experimentos, modelos y artefactos
-3. ✅ **Colaboración**: Logs y MLflow UI facilitanCompartir resultados con equipos
-4. ✅ **Monitorización**: Sistema de logging y métricas para seguimiento continuo
+---
 
-**Próximos Pasos:**
+## 🎓 Conclusion
 
-- 🚀 Desplegar modelo en GCP Cloud Run
-- 📊 Implementar dashboard de monitorización
-- 🔄 Configurar reentrenamiento automático
-- 📈 Escalar a múltiples modelos
+This pipeline demonstrates the **4 main MLOps objectives**:
+
+1. ✅ **Automation**: The pipeline runs completely without manual intervention
+2. ✅ **Lifecycle Management**: MLflow manages experiments, models, and artifacts
+3. ✅ **Collaboration**: Logs and MLflow UI facilitate sharing results with teams
+4. ✅ **Monitoring**: Logging and metrics system for continuous tracking
+
+**Next Steps:**
+
+- 🚀 Deploy model to GCP Cloud Run
+- 📊 Implement monitoring dashboard
+- 🔄 Configure automatic retraining
+- 📈 Scale to multiple models
